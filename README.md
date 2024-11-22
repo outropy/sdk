@@ -3,8 +3,7 @@
 ## Install
 
 ```bash
-echo "@outropy:registry=https://npm.pkg.github.com" >> ~/.npmrc
-npm install @outropy/ts-sdk@0.0.1
+npm install @outropy/ts-sdk
 ```
 
 ## Setup
@@ -16,7 +15,7 @@ OUTROPY_API_KEY=your-api-key
 OUTROPY_API_ENDPOINT=you-outropy-endpoint
 ```
 
-Your endpoint should look something like `https://XXXXX.outropy.ai` 
+Your endpoint should look something like `https://XXXXX.outropy.ai`
 
 
 ## Recommended usage
