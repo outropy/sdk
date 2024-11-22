@@ -13,15 +13,11 @@ Add environment variables to your project.
 
 ```bash
 OUTROPY_API_KEY=your-api-key
+OUTROPY_API_ENDPOINT=you-outropy-endpoint
 ```
 
-If you want to use a custom Outropy API domain, you can set it as well.
+Your endpoint should look something like `https://XXXXX.outropy.ai` 
 
-```bash
-OUTROPY_API_DOMAIN=https://outropy-api-domain
-```
-
-By default, it will use `https://app.outropy.ai`.
 
 ## Recommended usage
 
@@ -32,6 +28,7 @@ import { outropy as outropyClient } from '@outropy/ts-sdk';
 
 const outropy = outropyClient({
   apiKey: process.env.OUTROPY_API_KEY,
+  apiEndpoint: process.env.OUTROPY_API_ENDPOINT,
 });
 ```
 

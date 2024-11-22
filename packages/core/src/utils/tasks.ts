@@ -19,16 +19,6 @@ export async function createTask(
      * Default values.
      */
     {
-      directives: {
-        latency: 0,
-        accuracy: 0,
-        cost: 0,
-        reproducibility: 0,
-        freshness: 0,
-        personalization: 0,
-        recall: 0,
-        creativity: 0
-      },
       examples: [],
       reference_data: [],
     },

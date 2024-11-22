@@ -1,5 +1,11 @@
 # @outropy/ts-sdk
 
+## 0.0.3
+
+### Patch Changes
+
+- Switch to endpoint instead of domain. Make it mandatory.
+
 ## 0.0.2
 
 ### Patch Changes
