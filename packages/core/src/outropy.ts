@@ -4,7 +4,7 @@ import deepmerge from 'deepmerge';
 import { createTask } from './utils/tasks';
 
 type ApiClientAppConfig = {
-  domain?: string,
+  endpoint: string,
   apiKey: string,
 };
 
@@ -24,14 +24,14 @@ type ApiClientAppConfig = {
 export function createApiClient(appConfig: ApiClientAppConfig) {
   const config: ApiClientAppConfig = deepmerge(
     {
-      domain: process.env.OUTROPY_DOMAIN ?? 'https://app.outropy.ai',
+      endpoint: process.env.OUTROPY_API_ENDPOINT,
       apiKey: process.env.OUTROPY_API_KEY,
     },
     appConfig,
   );
 
   const customAxiosInstance = axios.create({
-    baseURL: `${config.domain}/api`,
+    baseURL: `${config.endpoint}/api`,
     withCredentials: true,
   });
 
@@ -41,7 +41,7 @@ export function createApiClient(appConfig: ApiClientAppConfig) {
 
   customAxiosInstance.interceptors.request.use(
     async function onRequestSuccess(request) {
-      request.headers['OUTROPY_API_KEY'] = config.apiKey;
+      request.headers['Authorization'] = `Bearer ${config.apiKey}`;
 
       return request;
     },

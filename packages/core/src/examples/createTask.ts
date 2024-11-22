@@ -2,8 +2,8 @@ import { outropy as outropyClient } from '../outropy';
 import { createTask } from '../utils/tasks';
 
 const outropy = outropyClient({
-  apiKey: 'keit.olle@icloud.com',
-  domain: 'http://localhost:8000',
+  apiKey: 'john@acme.com',
+  endpoint: 'http://localhost:8000',
 });
 
 (async () => {
