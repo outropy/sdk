@@ -27,7 +27,7 @@ import { outropy as outropyClient } from '@outropy/ts-sdk';
 
 const outropy = outropyClient({
   apiKey: process.env.OUTROPY_API_KEY,
-  apiEndpoint: process.env.OUTROPY_API_ENDPOINT,
+  endPoint: process.env.OUTROPY_API_ENDPOINT,
 });
 ```
 

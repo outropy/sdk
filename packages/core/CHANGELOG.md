@@ -1,5 +1,12 @@
 # @outropy/ts-sdk
 
+## 0.0.5
+
+### Patch Changes
+
+- Fix casing on endPoint on docs and examples.
+
+
 ## 0.0.4
 
 ### Patch Changes

@@ -4,7 +4,7 @@ import deepmerge from 'deepmerge';
 import { createTask } from './utils/tasks';
 
 type ApiClientAppConfig = {
-  endpoint: string,
+  endPoint: string,
   apiKey: string,
 };
 
@@ -24,7 +24,7 @@ type ApiClientAppConfig = {
 export function createApiClient(appConfig: ApiClientAppConfig) {
   const config: ApiClientAppConfig = deepmerge(
     {
-      endpoint: process.env.OUTROPY_API_ENDPOINT,
+      endPoint: process.env.OUTROPY_API_ENDPOINT,
       apiKey: process.env.OUTROPY_API_KEY,
     },
     appConfig,
