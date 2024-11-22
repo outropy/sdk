@@ -24,7 +24,7 @@ type ApiClientAppConfig = {
 export function createApiClient(appConfig: ApiClientAppConfig) {
   const config: ApiClientAppConfig = deepmerge(
     {
-      domain: process.env.OUTROPY_DOMAIN ?? 'https://api.outropy.ai',
+      domain: process.env.OUTROPY_DOMAIN ?? 'https://app.outropy.ai',
       apiKey: process.env.OUTROPY_API_KEY,
     },
     appConfig,

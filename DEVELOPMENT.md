@@ -13,7 +13,7 @@ After, run to bump version.
 npx changeset version
 ```
 
-It will create CHANGELOG.md and change package version. Commit it and push to remote.
+It will create CHANGELOG.md and change package version. **Commit it and push to remote.**
 
 After, just publish.
 
