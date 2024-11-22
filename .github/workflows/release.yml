@@ -12,6 +12,7 @@ permissions:
   pages: write
   id-token: write
   packages: write
+  pull-requests: write
 
 jobs:
   release:
