@@ -1,5 +1,11 @@
 # @outropy/ts-sdk
 
+## 0.0.9
+
+### Patch Changes
+
+- 7e58c46: Fix publish flow
+
 ## 0.0.8
 
 ### Patch Changes
