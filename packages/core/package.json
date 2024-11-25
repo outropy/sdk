@@ -9,9 +9,19 @@
   "files": [
     "dist/**"
   ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./*": {
+      "require": "./dist/*/index.js",
+      "import": "./dist/*/index.mjs"
+    }
+  },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts",
-    "dev": "tsup src/index.ts --format esm,cjs --watch --dts",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "generate:types": "npx -y openapi-typescript http://localhost:8000/openapi.json -o ./src/outropy-env.d.ts"
