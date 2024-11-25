@@ -1,5 +1,11 @@
 # @outropy/ts-sdk
 
+## 0.0.10
+
+### Patch Changes
+
+- f371675: Fix exports
+
 ## 0.0.9
 
 ### Patch Changes
