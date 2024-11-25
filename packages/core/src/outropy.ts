@@ -1,7 +1,13 @@
 import axios, { AxiosInstance, HttpStatusCode } from 'axios';
 import deepmerge from 'deepmerge';
 
-import { createTask } from './utils/tasks';
+import {
+  createTask,
+  executeTask,
+  getRun,
+  getRunInputs,
+  uploadData,
+} from './utils';
 
 type OutropyClientConfig = {
   /**
@@ -44,6 +50,8 @@ export function createOutropyClient(clientConfig: OutropyClientConfig) {
     },
     clientConfig,
   );
+
+  console.log('config', config);
 
   const customAxiosInstance = axios.create({
     baseURL: `${config.endPoint}/api`,
@@ -119,5 +127,31 @@ export function outropyClient(clientConfig: OutropyClientConfig = {}) {
      * Create a new Task.
      */
     createTask: addClientInstance(createTask),
+    /**
+     * Execute a task with the given input. Tasks are executed asynchronously,
+     * this will return a `urn` for the task run which can be used to retrieve
+     * the results later.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/execute-task}
+     */
+    executeTask: addClientInstance(executeTask),
+    /**
+     * Retrieve the inputs used for a given task run.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-run-inputs}
+     */
+    getRun: addClientInstance(getRun),
+    /**
+     * Retrieve the inputs used for a given task run.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-run-inputs}
+     */
+    getRunInputs: addClientInstance(getRunInputs),
+    /**
+     * Upload a text-based file to Outropy.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/upload-data}
+     */
+    uploadData: addClientInstance(uploadData),
   };
 };
