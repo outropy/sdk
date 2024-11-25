@@ -1,5 +1,11 @@
 # @outropy/ts-sdk
 
+## 0.0.8
+
+### Patch Changes
+
+- 56fdb3c: Fix prepublish script
+
 ## 0.0.7
 
 ### Patch Changes
