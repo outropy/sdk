@@ -10,6 +10,9 @@ type CreateTaskOptions =
     name: components['schemas']['CreateTaskRequest']['name'],
   };
 
+/**
+ * Create a new Task
+ */
 export async function createTask(
   client: AxiosInstance,
   options: CreateTaskOptions,

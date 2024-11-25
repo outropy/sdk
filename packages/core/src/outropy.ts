@@ -1,37 +1,52 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, HttpStatusCode } from 'axios';
 import deepmerge from 'deepmerge';
 
 import { createTask } from './utils/tasks';
 
-type ApiClientAppConfig = {
-  endPoint: string,
-  apiKey: string,
+type OutropyClientConfig = {
+  /**
+   * Outropy API endpoint. If not provided, it will default to the value
+   * of the OUTROPY_API_ENDPOINT environment variable.
+   * @default process.env.OUTROPY_API_ENDPOINT
+   */
+  endPoint?: string,
+  /**
+   * Outropy API key. If not provided, it will default to the value of the
+   * OUTROPY_API_KEY environment variable.
+   * @default process.env.OUTROPY_API_KEY
+   */
+  apiKey?: string,
 };
 
 /**
+ * Create a fetch-based Outropy client.
+ *
  * @example
  * Recommended usage:
  * ```ts
- * import { createApiClient } from '@outropy/typescript';
+ * import { createOutropyClient } from '@outropy/typescript';
  *
- * const outropy = createApiClient({
- *   apiKey: process.env.OUTROPY_API_KEY,
- * });
+ * const outropy = createOutropyClient();
  *
- * await outropy.get('/path/to/endpoint');
+ * async function doSomething() {
+ *   const response = await outropy.post('/tasks/create', {
+ *     task_type: 'transform',
+ *     name: 'character_extractor',
+ *   });
+ * }
  * ```
  */
-export function createApiClient(appConfig: ApiClientAppConfig) {
-  const config: ApiClientAppConfig = deepmerge(
+export function createOutropyClient(clientConfig: OutropyClientConfig) {
+  const config: OutropyClientConfig = deepmerge(
     {
       endPoint: process.env.OUTROPY_API_ENDPOINT,
       apiKey: process.env.OUTROPY_API_KEY,
     },
-    appConfig,
+    clientConfig,
   );
 
   const customAxiosInstance = axios.create({
-    baseURL: `${config.endpoint}/api`,
+    baseURL: `${config.endPoint}/api`,
     withCredentials: true,
   });
 
@@ -53,7 +68,14 @@ export function createApiClient(appConfig: ApiClientAppConfig) {
     },
     async function onResponseError(error) {
       if (axios.isAxiosError(error)) {
-        return error.response;
+        const skipAxiosException = [
+          HttpStatusCode.Unauthorized,
+          HttpStatusCode.NotFound,
+        ].includes(error.response?.status!);
+
+        if (skipAxiosException) {
+          return error.response;
+        }
       }
 
       return Promise.reject(error);
@@ -64,18 +86,25 @@ export function createApiClient(appConfig: ApiClientAppConfig) {
 }
 
 /**
+ * Create an Outropy client with ready-to-use methods.
+ *
  * @example
  * Recommended usage:
  * ```ts
- * import { outropy as outropyClient } from '@outropy/typescript';
+ * import { outropyClient } from '@outropy/typescript';
  *
- * const outropy = outropyClient({
- *   apiKey: process.env.OUTROPY_API_KEY,
- * });
+ * const outropy = outropyClient();
+ *
+ * async function doSomething() {
+ *   const data = await outropy.createTask({
+ *     task_type: 'transform',
+ *     name: 'character_extractor',
+ *   });
+ * }
  * ```
  */
-export function outropy(appConfig: ApiClientAppConfig) {
-  const client = createApiClient(appConfig);
+export function outropyClient(clientConfig: OutropyClientConfig = {}) {
+  const client = createOutropyClient(clientConfig);
 
   function addClientInstance<T extends (client: AxiosInstance, ...args: any[]) => any>(fn: T): (
     ...args: Parameters<T> extends [AxiosInstance, ...infer R] ? R : never

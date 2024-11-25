@@ -1,10 +1,6 @@
-import { outropy as outropyClient } from '../outropy';
-import { createTask } from '../utils/tasks';
+import { outropyClient as outropyClient } from '../outropy';
 
-const outropy = outropyClient({
-  apiKey: 'ot-example-key',
-  endPoint: 'http://localhost:8000',
-});
+const outropy = outropyClient();
 
 (async () => {
   const response = await outropy.createTask({
