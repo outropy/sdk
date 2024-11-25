@@ -181,7 +181,7 @@ export interface components {
              */
             prompt?: string | null;
             /** @description The default directives to be applied when running the task */
-            directives: components["schemas"]["Directives"];
+            directives?: components["schemas"]["Directives"] | null;
             /**
              * Collection Name
              * @description The name of the collection to use if this task end up creating one

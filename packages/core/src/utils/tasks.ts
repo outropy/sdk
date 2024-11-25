@@ -35,3 +35,24 @@ export async function createTask(
 
   return data;
 }
+
+type ExecuteTaskOptions = components['schemas']['ExecuteTaskRequest'];
+
+/**
+ * Execute a task with the given input. Tasks are executed asynchronously,
+ * this will return a `urn` for the task run which can be used to retrieve
+ * the results later.
+ *
+ * @see {@link https://docs.outropy.ai/api-reference/endpoint/execute-task}
+ */
+export async function executeTask(
+  client: AxiosInstance,
+  options: ExecuteTaskOptions,
+) {
+  const { data } = await client.post<components['schemas']['TaskExecuteResponse']>(
+    '/tasks/execute',
+    options,
+  );
+
+  return data;
+}
