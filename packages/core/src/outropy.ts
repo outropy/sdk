@@ -6,6 +6,7 @@ import {
   executeTask,
   getRun,
   getRunInputs,
+  uploadData,
 } from './utils';
 
 type OutropyClientConfig = {
@@ -146,5 +147,11 @@ export function outropyClient(clientConfig: OutropyClientConfig = {}) {
      * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-run-inputs}
      */
     getRunInputs: addClientInstance(getRunInputs),
+    /**
+     * Upload a text-based file to Outropy.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/upload-data}
+     */
+    uploadData: addClientInstance(uploadData),
   };
 };
