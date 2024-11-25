@@ -46,7 +46,11 @@ jobs:
           git commit -m "bump version" || echo "No changes to commit."
           git push
 
-      - name: Publish to npm
+      - name: Build Packages
+        if: steps.version.outputs.changes == 'true'
+        run: npm run build
+
+      - name: Publish Packages
         if: steps.version.outputs.changes == 'true'
         run: |
           npx changeset publish

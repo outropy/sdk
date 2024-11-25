@@ -10,7 +10,6 @@
     "dist/**"
   ],
   "scripts": {
-    "prepublish": "npm run build",
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts",
     "lint": "eslint \"src/**/*.ts*\"",
