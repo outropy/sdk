@@ -1,5 +1,16 @@
 # @outropy/ts-sdk
 
+## 0.0.11
+
+### Patch Changes
+
+- 70e2e7c: Introduce new methods
+
+  - Add `executeTask` method
+  - Add `getRun` method
+  - Add `getRunInputs` method
+  - Add `uploadData` method
+
 ## 0.0.10
 
 ### Patch Changes
