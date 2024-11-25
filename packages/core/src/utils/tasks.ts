@@ -48,7 +48,7 @@ type ExecuteTaskOptions = components['schemas']['ExecuteTaskRequest'];
 export async function executeTask(
   client: AxiosInstance,
   options: ExecuteTaskOptions,
-) {
+): Promise<components['schemas']['TaskExecuteResponse']> {
   const { data } = await client.post<components['schemas']['TaskExecuteResponse']>(
     '/tasks/execute',
     options,

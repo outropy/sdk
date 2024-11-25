@@ -13,7 +13,7 @@ type UploadOptions = components['schemas']['Body_upload_data_api_data_upload_pos
 export async function uploadData(
   client: AxiosInstance,
   options: UploadOptions,
-) {
+): Promise<components['schemas']['DataResponse']> {
   const { file, mimeType } = options;
 
   const headers = {
