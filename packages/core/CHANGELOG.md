@@ -1,5 +1,11 @@
 # @outropy/ts-sdk
 
+## 0.0.7
+
+### Patch Changes
+
+- acfe507: Change exports and enrich documentation
+
 ## 0.0.6
 
 ### Patch Changes
