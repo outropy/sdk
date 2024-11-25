@@ -12,7 +12,7 @@ type GetTaskRunOptions = {
 export async function getRun(
   client: AxiosInstance,
   options: GetTaskRunOptions,
-) {
+): Promise<components['schemas']['TaskRunResponse']> {
   const { task_run_urn } = options;
 
   const { data } = await client.get<components['schemas']['TaskRunResponse']>(
