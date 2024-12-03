@@ -3,11 +3,15 @@ import deepmerge from 'deepmerge';
 
 import {
   createTask,
+  downloadData,
   executeTask,
+  getMetadata,
   getRun,
   getRunInputs,
+  setMetadata,
   uploadData,
 } from './utils';
+import { createDataSource, createIndex, getDataSourceByName, getDataSourceByUrn, getIndexByName } from './utils/data-sources';
 
 type OutropyClientConfig = {
   /**
@@ -153,5 +157,53 @@ export function outropyClient(clientConfig: OutropyClientConfig = {}) {
      * @see {@link https://docs.outropy.ai/api-reference/endpoint/upload-data}
      */
     uploadData: addClientInstance(uploadData),
+    /**
+     * Download a data file from Outropy.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/download-data}
+     */
+    downloadData: addClientInstance(downloadData),
+    /**
+     * Get metadata for a data file from Outropy.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-metadata}
+     */
+    getMetadata: addClientInstance(getMetadata),
+    /**
+     * Set metadata for a data file in Outropy.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/set-metadata}
+     */
+    setMetadata: addClientInstance(setMetadata),
+    /**
+     * Create a data source.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/create-data-source}
+     */
+    createDataSource: addClientInstance(createDataSource),
+    /**
+     * Get a data source by name.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-data-source-by-name}
+     */
+    getDataSourceByName: addClientInstance(getDataSourceByName),
+    /**
+     * Create an index.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/create-index}
+     */
+    createIndex: addClientInstance(createIndex),
+    /**
+     * Get an index by name.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-index-by-name}
+     */
+    getIndexByName: addClientInstance(getIndexByName),
+    /**
+     * Get a data source by URN.
+     *
+     * @see {@link https://docs.outropy.ai/api-reference/endpoint/get-data-source-by-urn}
+     */
+    getDataSourceByUrn: addClientInstance(getDataSourceByUrn),
   };
 };
