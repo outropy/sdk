@@ -34,9 +34,8 @@ export async function uploadData(
 ) {
   const { fileName, fileContents, mimeType } = options;
 
-  const formData = {
-    [fileName]: fileContents,
-  }
+  const formData = new FormData();
+  formData.append('file', fileContents, fileName);
 
   const headers = {
     'X-Outropy-Upload-Mime-Type': mimeType,
