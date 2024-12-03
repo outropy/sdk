@@ -100,6 +100,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/tasks/by-name/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Task by Name */
+        get: operations["get_task_by_name_api_tasks_by_name__name__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/data/upload": {
         parameters: {
             query?: never;
@@ -111,17 +128,190 @@ export interface paths {
         put?: never;
         /**
          * Upload Data
-         * @description Upload a file to Outropy.
+         * @description Upload data to Outropy.
          *
          *     The uploaded content currently must be text-based.
          *
          *     This returns the URN of the uploaded file.
+         *
+         *     The returned URN can be used as subject when executing tasks.
          *
          *     <Note>
          *         You must specify the file's mime type in the `X-Outropy-Upload-Mime-Type` header.
          *     </Note>
          */
         post: operations["upload_data_api_data_upload_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data/{data_urn}/metadata": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Data Metadata
+         * @description Retrieve metadata for a file by URN.
+         *
+         *     The metadata includes the file name, mime type, size in bytes, and any additional metadata.
+         *
+         *
+         *     <Note>
+         *         See the [File Metadata](/file-metadata) for explanation of how additinal metadata is used by the Outropy platform.
+         *     </Note>
+         */
+        get: operations["get_metadata_api_data__data_urn__metadata_get"];
+        put?: never;
+        /**
+         * Set Data Metadata
+         * @description Set the metadata of a data item.
+         *
+         *     See [File Metadata](/file-metadata) for known keys by the Outropy platform.
+         */
+        post: operations["set_metadata_api_data__data_urn__metadata_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data/{data_urn}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Download Data
+         * @description Fetch data by URN.
+         *
+         *     The downloaded data is returned as plain text.
+         *
+         *     <Note>
+         *         See the [Upload Data](/api-reference/endpoint/upload-data) endpoint for more details on how to upload data.
+         *     </Note>
+         *
+         *     <Note>
+         *         In order to fetch the file name and mime type, use the [Get File Metadata](/api-reference/endpoint/get-file-metadata) endpoint.
+         *     </Note>
+         */
+        get: operations["get_data_api_data__data_urn__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data-sources/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create Data Source
+         * @description Create a new data source.
+         *
+         *     This create a new data source and a task that can be used to ingest data into it.
+         *
+         *     In order for this data source to be useful, you will need to create at least one index on it.
+         */
+        post: operations["create_data_source_api_data_sources_create_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data-sources/by-name/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Data Source by Name
+         * @description Get a data source by its name.
+         */
+        get: operations["get_data_source_by_name_api_data_sources_by_name__name__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data-sources/create-index": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create Index
+         * @description Create an index on a given data source.
+         *
+         *     You can customize the index by means of its indexing task.
+         */
+        post: operations["create_index_api_data_sources_create_index_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data-sources/index-by-name": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Index by Name
+         * @description Get an index by its name.
+         */
+        get: operations["get_index_by_name_api_data_sources_index_by_name_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/data-sources/{urn_str}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Data Source by URN
+         * @description Get a data source by its URN.
+         *
+         *     Returns information about a data source.
+         */
+        get: operations["get_data_source_api_data_sources__urn_str__get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -140,6 +330,41 @@ export interface components {
              * @description Data to upload
              */
             file: string;
+        };
+        /** CreateDataSourceRequest */
+        CreateDataSourceRequest: {
+            /**
+             * Name
+             * @description The unique name of this data source
+             */
+            name: string;
+            /**
+             * Description
+             * @description Description of the content to be store in this data source
+             */
+            description?: string | null;
+            /** @description Directives to control how the ingestion task will behave */
+            directives?: components["schemas"]["Directives"] | null;
+        };
+        /** CreateIndexRequest */
+        CreateIndexRequest: {
+            /**
+             * Name
+             * @description The unique name of this index among the associated data source
+             */
+            name: string;
+            /**
+             * Data Source Urn
+             * @description The URN of the data source to index
+             */
+            data_source_urn: string;
+            /**
+             * Description
+             * @description Description of the content to be indexed
+             */
+            description?: string | null;
+            /** @description The type of index to create */
+            type: components["schemas"]["IndexerType"];
         };
         /** CreateTaskRequest */
         CreateTaskRequest: {
@@ -195,6 +420,40 @@ export interface components {
              * @description The URN of data being processed
              */
             urns: components["schemas"]["RawUrn"][];
+        };
+        /** DataSourceMetadata */
+        DataSourceMetadata: {
+            /** Urn */
+            urn: string;
+            /** File Name */
+            file_name: string;
+            /** Mime Type */
+            mime_type: string;
+            /** Size Bytes */
+            size_bytes: number;
+            /** Metadata */
+            metadata: {
+                [key: string]: string;
+            };
+        };
+        /** DataSourceResponse */
+        DataSourceResponse: {
+            /** Urn */
+            urn: string;
+            /** Ingestion Task Urn */
+            ingestion_task_urn: string | null;
+            /** Name */
+            name: string;
+            /** Description */
+            description: string;
+            /** Type Str */
+            type_str: string;
+            /** Status Str */
+            status_str: string;
+            /** Icon */
+            icon: string;
+            /** Href */
+            href: string;
         };
         /** Directives */
         Directives: {
@@ -263,7 +522,7 @@ export interface components {
              * Subject Urns
              * @description The URN of the subjects for the request, at least one is required
              */
-            subject_urns?: string[];
+            subject_urns: string[];
             /** @description (Optional) The directives to apply to this request, overriding the task defaults */
             directives?: components["schemas"]["Directives"] | null;
             /**
@@ -277,6 +536,23 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** IndexResponse */
+        IndexResponse: {
+            /** Urn */
+            urn: string;
+            /** Data Source Urn */
+            data_source_urn: string;
+            /** Ingestion Task Urn */
+            ingestion_task_urn: string;
+            /** Href */
+            href: string;
+        };
+        /**
+         * IndexerType
+         * @constant
+         * @enum {string}
+         */
+        IndexerType: "semantic_text";
         /** PipelineCreateResponse */
         PipelineCreateResponse: {
             /** Urn */
@@ -330,7 +606,7 @@ export interface components {
              * Results Urn
              * @description The URN of the results of this task run
              */
-            results_urn: string;
+            results_urn?: string | null;
             /**
              * Created At
              * Format: date-time
@@ -532,6 +808,37 @@ export interface operations {
             };
         };
     };
+    get_task_by_name_api_tasks_by_name__name__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     upload_data_api_data_upload_post: {
         parameters: {
             query?: never;
@@ -555,6 +862,265 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DataResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_metadata_api_data__data_urn__metadata_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                data_urn: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DataSourceMetadata"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_metadata_api_data__data_urn__metadata_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                data_urn: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    [key: string]: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_data_api_data__data_urn__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                data_urn: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_data_source_api_data_sources_create_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDataSourceRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DataSourceResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_data_source_by_name_api_data_sources_by_name__name__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DataSourceResponse"] | null;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_index_api_data_sources_create_index_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateIndexRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IndexResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_index_by_name_api_data_sources_index_by_name_get: {
+        parameters: {
+            query: {
+                data_source_name: string;
+                index_name: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IndexResponse"] | null;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_data_source_api_data_sources__urn_str__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                urn_str: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DataSourceResponse"];
                 };
             };
             /** @description Validation Error */

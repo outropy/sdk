@@ -12,6 +12,7 @@ const outropy = outropyClient();
 
   const executeTaskResponse = await outropy.executeTask({
     task_urn: createTaskResponse.urn,
+    subject_urns: ['urn:outropy:data:1234567890'],
   });
 
   console.log('executeTask():\n', executeTaskResponse);

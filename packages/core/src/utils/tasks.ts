@@ -10,6 +10,10 @@ type CreateTaskOptions =
     name: components['schemas']['CreateTaskRequest']['name'],
   };
 
+type GetTaskByNameOptions = {
+  name: string;
+}
+
 /**
  * Create a new Task
  */
@@ -55,4 +59,19 @@ export async function executeTask(
   );
 
   return data;
+}
+
+
+export async function getTaskByName(
+  client: AxiosInstance,
+  options: GetTaskByNameOptions,
+) {
+  const result = await client.get<string | null>(
+    `/tasks/by-name/${options.name}`,
+  );
+  if (result.status === 200) {
+    return result.data;
+  }
+
+  return null;
 }
