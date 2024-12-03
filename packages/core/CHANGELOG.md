@@ -1,5 +1,11 @@
 # @outropy/ts-sdk
 
+## 0.0.12
+
+### Patch Changes
+
+- 266ae6d: Add multiple new methods around data sources and indexing. Fix upload.
+
 ## 0.0.11
 
 ### Patch Changes
